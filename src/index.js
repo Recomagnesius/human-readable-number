@@ -87,27 +87,29 @@ module.exports = function toReadable(number) {
         tens = Number(tens);
         if (tens < 21 && tens != 0) {
             tens = firstTwoTen(tens);
+            result = hun + ' ' + tens;
         }
         else if (tens == 0) {
-            tens = '00'
+            result = hun;
         }
-        else {
+        else{
             tens = String(tens);
             tens = tens.split('');
             if (tens[1] == '0') {
-                let result = Number(number[0]);
+                tens[0] = Number(tens[0]);
                 tens = lessHundred(tens[0]);
+                result = hun + ' ' + tens;
             }
             else {
                 tens = String(tens);
                 tens = tens.split('');
                 let num10 = lessHundred(tens[0]);
-                let num1 = firstTwoTen(tens[1]);
+                let num1  = firstTwoTen(tens[1+1]);
                 tens = num10 + ' ' + num1;
+                result = hun + ' ' + tens;
             }
-            result = hun + ' ' + tens;
-            return result;
         }
+        return result;
 
     }
 }
